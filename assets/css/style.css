@@ -1,0 +1,30 @@
+.view-high-scores a {
+    font-size: medium;
+    color: #a281b8;
+    cursor: pointer;
+}
+
+.view-high-scores a:hover{
+   color: #470077;
+}
+
+.timer {
+    font-size: medium;
+    color: black;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-weight: lighter;
+}
+
+.btn {
+    background-color: #470077;
+}
+
+.btn:hover{
+    background-color: #a281b8
+}
