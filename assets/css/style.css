@@ -5,10 +5,12 @@
 }
 
 .view-high-scores a:hover{
-   color: #470077;
+   font-size: 20px;
+   text-decoration: none;
+   text-shadow: 2px 2px 8px #470077;
 }
 
-.timer {
+.timer-text, .timerdiv {
     font-size: medium;
     color: black;
 }
@@ -23,8 +25,18 @@ h2 {
 
 .btn {
     background-color: #470077;
+    border: none;
 }
 
 .btn:hover{
     background-color: #a281b8
+}
+
+.btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-group-vertial {
+    border: none;
 }
