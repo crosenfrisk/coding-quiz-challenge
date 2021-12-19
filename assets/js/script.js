@@ -1,4 +1,4 @@
-//  CODING QUIZ QUESTIONS
+//  JAVASCRIPT CODING QUIZ
 
 // Start Quiz button from index.html brings to quiz.html where timer starts and questions initiate. use btnStartEl for event listener at bottom of page.
     var btnStartEl = document.querySelector('btnStart');
@@ -21,30 +21,7 @@
 
 var questionTextEl = document.getElementById('questionText');
 var questionNumber = -1;
-
-//  (*options are displayed for user to choose from
-//  user selects an option
-//  if correct
-    //  congratulate and move on to next question
-//  if incorrect, inform incorrect, 
-    //  subtract time from timer as pentalty and then move on to next question
-// process repeats*)
-//  after all questions are answered OR timer runs out
-    // "Game over!"" message displays
-    // when (questionsAnswered == 
-// user enters initials
-    // score is saved
-    // all scores are returned and displayed
-
-
-
-   
-
-    // var btnOption1El = document.getElementById('btn-option1');
-    // var btnOption2El = document.getElementById('btn-option2');
-    // var btnOption3El = document.getElementById('btn-option3');
-    // var btnOption4El = document.getElementById('btn-option4');
-
+// added this on because I wasn't sure how to identify click on button elements: var possibleAnswers = document.getElementById('possibleAnswers');
 
     function startQuiz(event) {
         questionNumber += 1;
@@ -57,7 +34,7 @@ var questionNumber = -1;
             var option =document.getElementById('option' + (i+1))
             option.innerHTML= options[i][0]+ " : " + options[i][1];
 
-        //     option.addEventListener('click', startQuiz);
+        //     options.addEventListener('click' {startQuiz);
         //     if (option != correctAnswer) {
         //     penalty();
         // };
@@ -119,7 +96,19 @@ var questionNumber = -1;
         }
     }
 
+//  after all questions are answered OR timer runs out
+    // "Game over!"" message displays
+
+
+// function enterHighScore() {
+        // user enters initials
+            // score is saved
+                // all scores are returned and displayed
+// }
+
 if (window.location.pathname.includes("quiz.html")) {
     countdown();
     startQuiz();
 }
+
+// btnStartEl.addEventListener('click', startQuiz, countdown);
