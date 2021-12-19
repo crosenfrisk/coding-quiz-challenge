@@ -7,12 +7,25 @@
     var timerEl = document.getElementById('timerdiv');    
     var timerId = setInterval(countdown, 1000);
  
+    // function startTimer(duration, display) {
+    //     var timer = duration, seconds;
+    //     setInterval (function () {
+    //         seconds = parseInt(timer % 60, 10);
+    //         seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+    //         if (--timer < 0) {
+    //             timer = duration;
+    //         }
+    //     }, 1000);
+    // }
+
     function countdown() {
+        // startTimer();
         if (timeRemaining == -1) {
             clearTimeout(timerId);
             alert('Game Over!');
           } else {
-            timerEl.innerHTML = timeRemaining;
+            timerEl.innerHTML = timeRemaining; // what isn't working here?
             timeRemaining--;
           }
         }
@@ -20,28 +33,34 @@
 // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance. Incorrect answers receive penalty in reduction of allotted time by 10 seconds.
 
 var questionTextEl = document.getElementById('questionText');
+var questionNumberEl = document.getElementById('questionNumber');
 var questionNumber = -1;
+var correctAnswer = document.getElementById('correctAnswer');
+var optionSelected = document.getElementsByClassName('btn-group-vertical');
+
 // added this on because I wasn't sure how to identify click on button elements: var possibleAnswers = document.getElementById('possibleAnswers');
 
-    function startQuiz(event) {
-        questionNumber += 1;
-        var q = myQuestions[questionNumber];
-        var options = Object.entries(q.option)
+function nextQuestion() {
+    for (var i = 0; i < myQuestions.length; i++);
+}
+
+function displayQuiz(event) {
+    questionNumber += 1;
+    var q = myQuestions[questionNumber];
+    var options = Object.entries(q.option)
         
-       questionTextEl.innerHTML= q.question;
+    questionTextEl.innerHTML= q.question;
 
-        for (var i = 0; i < options.length; i++) {
-            var option =document.getElementById('option' + (i+1))
-            option.innerHTML= options[i][0]+ " : " + options[i][1];
+    for (var i = 0; i < options.length; i++) {
+        var option =document.getElementById('option' + (i+1))
+        option.innerHTML= options[i][0]+ " : " + options[i][1];
 
-        //     options.addEventListener('click' {startQuiz);
-        //     if (option != correctAnswer) {
-        //     penalty();
-        // };
-            
-        }
-
-    };
+        option.addEventListener('click', nextQuestion()) 
+        if (option != correctAnswer) {
+            penalty();        
+        };
+    }
+};
 
     var myQuestions = [ 
         {
@@ -90,25 +109,29 @@ var questionNumber = -1;
           }
       ];
 
-      var penalty = function() {
-        if (selectedOption != correctAnswer){
-        timeRemaining - 10;
+    function penalty() {
+        if (optionSelected != correctAnswer){
+            countdown -= 10;
         }
     }
 
-//  after all questions are answered OR timer runs out
-    // "Game over!"" message displays
+    //  after all questions are answered OR timer runs out
+        // "Game over!"" message displays
 
 
-// function enterHighScore() {
-        // user enters initials
-            // score is saved
-                // all scores are returned and displayed
-// }
+    // function enterHighScore() {
+            // user enters initials
+                // score is saved
+                    // all scores are returned and displayed
+    // }
 
-if (window.location.pathname.includes("quiz.html")) {
-    countdown();
-    startQuiz();
-}
+    if (window.location.pathname.includes("quiz.html")) {
+        countdown();
+        displayQuiz();
+    }
 
-// btnStartEl.addEventListener('click', startQuiz, countdown);
+    // if (window.location.pathname.includes("highscores.html")) {
+    //     loadHighScores();
+    // }
+
+    // btnStartEl.addEventListener('click', startQuiz, countdown);
