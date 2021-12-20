@@ -37,7 +37,6 @@ function displayQuiz(event) {
     questionTextEl.innerHTML= q.question;
 
     for (var i = 0; i < options.length; i++) {
-        console.log('option' + (i+1))
         var option =document.getElementById('option' + (i+1))
         option.innerHTML= options[i][0]+ " : " + options[i][1];
 
