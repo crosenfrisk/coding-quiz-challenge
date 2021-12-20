@@ -14,7 +14,7 @@ When "Start Quiz" button is pressed, users are presented with a short quiz on Ja
 
 ### View the Project
 
-![Screenshot of JavaScript Quiz](assets\images\QuizProjectHome.jpg)
+![Screenshot of JavaScript Quiz](assets/images/QuizProjectHome.jpg)
 
 https://crosenfrisk.github.io/coding-quiz-challenge/
 
@@ -56,7 +56,7 @@ build-javascript-countdown-timer-no-dependencies/) by Yaphi Berhanu, Nilson Jacq
 
 ### MIT License
 
-Copyright (c) [2021] [Claire Rosenfrisk]
+Copyright (c) 2021 Claire Rosenfrisk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
