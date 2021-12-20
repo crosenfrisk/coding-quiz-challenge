@@ -20,9 +20,11 @@ https://crosenfrisk.github.io/coding-quiz-challenge/
 
 ### Challenges Faced
 
-I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned. The timer does count down from the initial set time *arbitrarily set at 75 seconds* to zero, and displays "Game Over!" when countdown reaches zero, but pentalty as it is currently written causes the timer to jump down from 75 seconds to 34, and so on.
+I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned.
 
-Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visable on html page *at times only one object would display while others disappeared*.
+Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visable on html page *at times only one object would display while others disappeared* Thankfully this is now fixed.
+
+Getting the leaderboard up and running 
 
 
 ### What I Enjoyed

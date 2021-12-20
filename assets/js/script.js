@@ -1,49 +1,32 @@
 //  JAVASCRIPT CODING QUIZ
 
-// Start Quiz button from index.html brings to quiz.html where timer starts and questions initiate. use btnStartEl for event listener at bottom of page.
-    var btnStartEl = document.querySelector('btnStart');
+// Start Quiz button from index.html brings to quiz.html where timer starts and questions initiate.
+
 // Timer begins at a set time, and counts down to zero. Penalties from wrong guesses deduct an additional 10 seconds from the clock.
+//  after all questions are answered OR timer runs out
+        // "Game over!"" message displays
+        //  User adds initials and leaderboard is updated.
+
     var timeRemaining = 75;
     var timerEl = document.getElementById('timerdiv');    
-   
- 
-    // function startTimer(duration, display) {
-    //     var timer = duration, seconds;
-    //     setInterval (function () {
-    //         seconds = parseInt(timer % 60, 10);
-    //         seconds = seconds < 10 ? "0" + seconds : seconds;
-    
-    //         if (--timer < 0) {
-    //             timer = duration;
-    //         }
-    //     }, 1000);
-    // }
 
     function countdown() {
         // startTimer();
         if (timeRemaining == -1) {
             clearTimeout(timerId);
             alert('Game Over!');
+            window.prompt('Please enter your initials to add your score to the leaderboard!');
           } else {
-            timerEl.innerHTML = timeRemaining; // what isn't working here?
+            timerEl.innerHTML = timeRemaining;
             timeRemaining--;
           }
         }
 
-// Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance. Incorrect answers receive penalty in reduction of allotted time by 10 seconds.
+// Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance. 
 
 var questionTextEl = document.getElementById('questionText');
 var questionNumberEl = document.getElementById('questionNumber');
 var questionNumber = -1;
-var optionSelected = document.getElementsByClassName('btn-group-vertical');
-
-// added this on because I wasn't sure how to identify click on button elements: var possibleAnswers = document.getElementById('possibleAnswers');
-
-// function nextQuestion() {
-//     for (var i = 0; i < myQuestions.length; i++){
-//         //
-//     }
-// }
 
 function displayQuiz(event) {
     questionNumber += 1;
@@ -59,17 +42,53 @@ function displayQuiz(event) {
         option.innerHTML= options[i][0]+ " : " + options[i][1];
 
         option.addEventListener('click', function  (event) {
-             if ( event.target.textContent[0] != correctAnswer) {
-                 console.log(timerId)
+             if (event.target.textContent[0] != correctAnswer) {
                  timeRemaining -= 10
-            };             
-             displayQuiz(); 
-
-
-            }) 
-
+            }
+            displayQuiz(); 
+            }
+        )
     }
 };
+
+
+// when (options.length-1 == i) {
+//     endQuiz();
+// }
+
+// function endQuiz(event) {
+//     if (timeRemaining === 0 || options.length -1 == i) {
+//     window.alert("The quiz has now ended. Let's see how you did!");
+//     var playerInitials = window.prompt('Please enter your initials:')
+  
+//     // check localStorage for high score, if it's not there, use 0
+//     var highScore = localStorage.getItem("highscore");
+//     if (timerEl === null) {
+//       highScore = 0;
+//     }
+//     // if player has more money than the high score, player has new high score!
+//     if (timerEl > highScore) {
+//       localStorage.setItem("highscore", timerEl);
+//       localStorage.setItem("name", playerInitials);
+  
+//       alert(playerInitials + " now has the high score of " + timerEl + "!");
+//     } 
+//     else {
+//       alert(playerInitials + " did not beat the high score of " + highScore + ". Maybe next time!");
+//     }
+  
+//     // ask player if they'd like to play again
+//     var quizAgainConfirm = window.confirm("Would you like to try the quiz again?");
+  
+//     if (quizAgainConfirm) {
+//       displayQuiz();
+//     } 
+//     else {
+//       window.alert("Thank you for completing our JavaScript quiz.Come back soon!");
+//     }
+//   };
+
+// Quiz Questions and Answer Options:
 
     var myQuestions = [ 
         {
@@ -118,15 +137,6 @@ function displayQuiz(event) {
           }
       ];
 
-    // function penalty() {
-        // if (optionSelected != correctAnswer){
-        //     countdown -= 10;
-        // }
-    // }
-
-    //  after all questions are answered OR timer runs out
-        // "Game over!"" message displays
-
 
     // function enterHighScore() {
             // user enters initials
@@ -136,8 +146,8 @@ function displayQuiz(event) {
 
     if (window.location.pathname.includes("quiz.html")) {
         var timerId = setInterval(countdown, 1000);
-     
         displayQuiz();
+        // endQuiz();
     }
 
     // if (window.location.pathname.includes("highscores.html")) {
