@@ -24,7 +24,7 @@ I struggled to get the timer to work as desired. Getting the penalty to register
 
 Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visable on html page *at times only one object would display while others disappeared* Thankfully this is now fixed.
 
-Getting the leaderboard up and running 
+Getting the leaderboard up and running meant revisiting course material from week 3 lesson 5.8. I realized upon reading it that I struggled with the material the first time around, so it doesn't surprise me now when working with this project that I have not yet been able to complete this portion of the assignment. ** I do plan to update after I spend some more time reviewing the material and meeting with my tutor this week and next .**
 
 
 ### What I Enjoyed
@@ -54,4 +54,24 @@ build-javascript-countdown-timer-no-dependencies/) by Yaphi Berhanu, Nilson Jacq
 
 [Course Material from Trilogy Education and the Univeristy of Minnesota](https://courses.bootcampspot.com/courses/1215/pages/5-dot-5-4-schedule-task-auditing?module_item_id=367554) on JavaScript timers: setTimeout() and setInterval();
 
-### License
+### MIT License
+
+Copyright (c) [2021] [Claire Rosenfrisk]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
