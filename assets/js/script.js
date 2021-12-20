@@ -5,7 +5,7 @@
 // Timer begins at a set time, and counts down to zero. Penalties from wrong guesses deduct an additional 10 seconds from the clock.
     var timeRemaining = 75;
     var timerEl = document.getElementById('timerdiv');    
-    var timerId = setInterval(countdown, 1000);
+   
  
     // function startTimer(duration, display) {
     //     var timer = duration, seconds;
@@ -35,30 +35,39 @@
 var questionTextEl = document.getElementById('questionText');
 var questionNumberEl = document.getElementById('questionNumber');
 var questionNumber = -1;
-var correctAnswer = document.getElementById('correctAnswer');
 var optionSelected = document.getElementsByClassName('btn-group-vertical');
 
 // added this on because I wasn't sure how to identify click on button elements: var possibleAnswers = document.getElementById('possibleAnswers');
 
-function nextQuestion() {
-    for (var i = 0; i < myQuestions.length; i++);
-}
+// function nextQuestion() {
+//     for (var i = 0; i < myQuestions.length; i++){
+//         //
+//     }
+// }
 
 function displayQuiz(event) {
     questionNumber += 1;
     var q = myQuestions[questionNumber];
     var options = Object.entries(q.option)
+    var correctAnswer = myQuestions[questionNumber].correctAnswer
         
     questionTextEl.innerHTML= q.question;
 
     for (var i = 0; i < options.length; i++) {
+        console.log('option' + (i+1))
         var option =document.getElementById('option' + (i+1))
         option.innerHTML= options[i][0]+ " : " + options[i][1];
 
-        option.addEventListener('click', nextQuestion()) 
-        if (option != correctAnswer) {
-            penalty();        
-        };
+        option.addEventListener('click', function  (event) {
+             if ( event.target.textContent[0] != correctAnswer) {
+                 console.log(timerId)
+                 timeRemaining -= 10
+            };             
+             displayQuiz(); 
+
+
+            }) 
+
     }
 };
 
@@ -98,7 +107,7 @@ function displayQuiz(event) {
         },
         {
             questionNumber: 4,
-            question: "What is the difference between && and ||? *",
+            question: "What is the difference between && and ||? ",
             option: {
                 A: "The logical operator && returns true if none of the expressions are true while the logical operator || returns true if one expression or the other returns true.",
                 B: "The logical operator && returns true if both expressions are true while the logical operator || returns false if one expression or the other returns true.",
@@ -109,11 +118,11 @@ function displayQuiz(event) {
           }
       ];
 
-    function penalty() {
-        if (optionSelected != correctAnswer){
-            countdown -= 10;
-        }
-    }
+    // function penalty() {
+        // if (optionSelected != correctAnswer){
+        //     countdown -= 10;
+        // }
+    // }
 
     //  after all questions are answered OR timer runs out
         // "Game over!"" message displays
@@ -126,7 +135,8 @@ function displayQuiz(event) {
     // }
 
     if (window.location.pathname.includes("quiz.html")) {
-        countdown();
+        var timerId = setInterval(countdown, 1000);
+     
         displayQuiz();
     }
 
