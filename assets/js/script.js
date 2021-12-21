@@ -139,6 +139,8 @@ function displayQuiz(event) {
 
     // function enterHighScore() {
             // user enters initials
+            // var userFormEl = document.querySelector("#user-form");
+            // var nameInputEl = document.querySelector("#user-input");
                 // score is saved
                     // all scores are returned and displayed
     // }
