@@ -19,10 +19,20 @@
             <div class="col text-center">
                 <h1 class="mt-5 justify-content-center p-5 col-sm-12 col-lg-12"><strong>High Scores</strong></h1>
                 <div class="high-scores col-sm">I'm a container that holds high score records</div>
-                <button type="button" class="btn btn-primary mt-5 btn-lg"><a href="index.html">Go back</a></button>
-                <button type="button" class="btn btn-primary mt-5 btn-lg">Clear high scores</button>
+                <form id="user-form" class="user-initials">
+                  <label class="form-label" for="username">Enter Your Initials</label>
+                  <input name="user-input" id="user-input" type="text" autofocus="true" class="form-input"/>
+                  <button type="submit" class="pbtn mt-5 btn-lg">Submit</button>
+              </form>
             </div>
-        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                    <button type="button" class="justify-content-center mt-5 btn btn-primary btn-lg" ><a href="index.html">Go back</a></button>
+                    <button type="button" class="justify-content-center mt-5 btn btn-primary btn-lg">Clear high scores</button> 
+                </div>
+                </div>
+             </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
