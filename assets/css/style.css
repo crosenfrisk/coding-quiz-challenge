@@ -38,6 +38,16 @@ h2 {
     text-decoration: none;
 }
 
-.btn-group-vertial {
+.btn-group-vertical {
     border: none;
+}
+
+.correct-or-incorrect {
+    font-size: large;
+    font-style: italic;
+    font-weight: lighter;
+    border-top: 1px dotted grey;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
 }

@@ -8,56 +8,6 @@
 //  Score is equivalent to time remaining. If timer reaches zero, score is zero; suggest player try again to improve their score.
 //  Player can view and clear leader-board, or return to the start screen to play again.
 
-// Quiz Questions and Answer Options:
-
-var myQuestions = [
-  {
-    questionNumber: 1,
-    question:
-      "Inside the HTML document, where do you place your JavaScript code?",
-    option: {
-      A: "Inside the `link` element",
-      B: "Inside the `script` element",
-      C: "Inside the `head` element",
-      D: "In the `footer` element",
-    },
-    correctAnswer: "D",
-  },
-  {
-    questionNumber: 2,
-    question: "What operator is used to assign a value to a declared variable?",
-    option: {
-      A: "Question mark (?)",
-      B: "Double-equal (==)",
-      C: "Equal sign (=)",
-      D: "Colon (:)",
-    },
-    correctAnswer: "C",
-  },
-  {
-    questionNumber: 3,
-    question: "What are the six primitive data types in JavaScript?",
-    option: {
-      A: "sentence, float, data, bigInt, symbol, undefined",
-      B: "string, num, falsy, bigInt, symbol, undefined",
-      C: "sentence, int, truthy, bigInt, symbol, undefined",
-      D: "string, number, boolean, bigInt, symbol, undefined",
-    },
-    correctAnswer: "D",
-  },
-  {
-    questionNumber: 4,
-    question: "What is the difference between && and ||? ",
-    option: {
-      A: "The logical operator && returns true if none of the expressions are true while the logical operator || returns true if one expression or the other returns true.",
-      B: "The logical operator && returns true if both expressions are true while the logical operator || returns false if one expression or the other returns true.",
-      C: "The logical operator && returns true if one expression is true while the logical operator || returns true if both expressions return true true.",
-      D: "The logical operator && returns true if both expressions are true while the logical operator || returns true if one expression or the other returns true.",
-    },
-    correctAnswer: "D",
-  },
-];
-
 var timeRemaining = 5; // TODO: update to 75 seconds!!
 var timerEl = document.getElementById("timerDiv");
 var btnStartEl = document.getElementById("btnStart");
@@ -94,70 +44,90 @@ function removeWelcomePage() {
 }
 
 function displayQuiz() {
-   // Add new H1
-    var newH1 = document.createElement("h1");
-    var headers = document.querySelector("#headers");
+  //  Location for new H1 and H2
+  var headers = document.querySelector("#headers");
 
-    newH1.textContent = "This will say: Question #";
-    headers.appendChild(newH1);
+  // Add new H1
+  var newH1 = document.createElement("h1");
+  newH1.setAttribute("id", "questionNumber");
 
-//  Add new H2
-    var newH2 = document.createElement("h2");
-    newH2.textContent = "this will be a question";
-    headers.appendChild(newH2);
+  newH1.textContent = "Question # " + myQuestions[0].questionNumber;
+  headers.appendChild(newH1);
 
+  //  Add new H2
+  var newH2 = document.createElement("h2");
+  newH2.setAttribute("id", "questionText");
+  newH2.textContent = myQuestions[0].question;
+  headers.appendChild(newH2);
+
+  // Location for option buttons
   var optionContainerEl = document.querySelector("#option-container");
 
   // Add button "option" elements (that hold questions)
   var btnOption1 = document.createElement("button");
-//   var btnOption2 = document.createElement("button");
-//   var btnOption3 = document.createElement("button");
-//   var btnOption4 = document.createElement("button");
+  var btnOption2 = document.createElement("button");
+  var btnOption3 = document.createElement("button");
+  var btnOption4 = document.createElement("button");
 
   btnOption1.className = "btn btn-primary mt-5 btn-lg";
-//   btnOption2.className = "btn btn-primary mt-5 btn-lg";
-//   btnOption3.className = "btn btn-primary mt-5 btn-lg";
-//   btnOption4.className = "btn btn-primary mt-5 btn-lg";
+  btnOption2.className = "btn btn-primary mt-5 btn-lg";
+  btnOption3.className = "btn btn-primary mt-5 btn-lg";
+  btnOption4.className = "btn btn-primary mt-5 btn-lg";
 
-//   var options = [];
-//   var questions = myQuestions[i];
   btnOption1.textContent = myQuestions[0].option.A;
-//   btnOption2.textContent = myQuestions[0].option.B;
-//   btnOption3.textContent = myQuestions[0].option.C;
-//   btnOption4.textContent = myQuestions[0].option.D;
+  btnOption2.textContent = myQuestions[0].option.B;
+  btnOption3.textContent = myQuestions[0].option.C;
+  btnOption4.textContent = myQuestions[0].option.D;
 
   optionContainerEl.appendChild(btnOption1);
-//   optionContainerEl.appendChild(btnOption2);
-//   optionContainerEl.appendChild(btnOption3);
-//   optionContainerEl.appendChild(btnOption4);
+  optionContainerEl.appendChild(btnOption2);
+  optionContainerEl.appendChild(btnOption3);
+  optionContainerEl.appendChild(btnOption4);
+
+  cycleQuestionsAndOptions(0);
 }
 
-// Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
+function cycleQuestionsAndOptions(pramQuestionNumber) {
+  // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
+  // var questionTextEl = document.getElementById("#questionText");
+  // var questionNumberEl = document.getElementById("#questionNumber");
+  // var questionNumber = -1;
+  // console.log(pramQuestionNumber);
+  // questionNumber += 1;
+  //   var q = myQuestions[questionNumber];
+  //   var options = Object.entries(q.option);
+  //   var correctAnswer = myQuestions[questionNumber].correctAnswer;
+  //   questionTextEl.innerHTML = q.question;
+  //   for (var i = 0; i < options.length; i++) {
+  //     var option = document.getElementById("option" + (i + 1));
+  // option.innerHTML = options[i][0] + " : " + options[i][1];
+  //     option.addEventListener("click", function (event) {
+  //       if (event.target.textContent[0] != correctAnswer) {
+  //         timeRemaining -= 10;
+  //       }
+  //       cycleQuestionsAndOptions();
+  //     });
+}
+
 // Display "correct"  or "incorrect" after page advances to next question; deduct time from timer if incorrect.
 
-// var questionTextEl = document.getElementById("questionText");
-// var questionNumberEl = document.getElementById("questionNumber");
-// var questionNumber = -1;
+//// This is new: not sure if it will work:
+// function displayCorrect(on) {
+//     var answerKey = document.getElementById('#correct-or-incorrect');
+//     answerKey.style['display'] = on ? 'block': 'none';
+//     answerKey(true);
+//     answerKey(false);
 
-// function cycleQuestions(event) {
-//   questionNumber += 1;
-//   var q = myQuestions[questionNumber];
-//   var options = Object.entries(q.option);
-//   var correctAnswer = myQuestions[questionNumber].correctAnswer;
+//     var displayCorrect = document.createElement("p");
+//     displayCorrect.textContent = "Correct!";
+//     displayCorrect.className= "correct-or-incorrect";
 
-//   questionTextEl.innerHTML = q.question;
+//     optionContainerEl.addEventListener("click", displayCorrect);
 
-//   for (var i = 0; i < options.length; i++) {
-//     var option = document.getElementById("option" + (i + 1));
-//     option.innerHTML = options[i][0] + " : " + options[i][1];
-
-//     option.addEventListener("click", function (event) {
-//       if (event.target.textContent[0] != correctAnswer) {
-//         timeRemaining -= 10;
-//       }
-//       cycleQuestions);
-//     });
-//   }
+//     var displayIncorrect = document.createElement("p");
+//     displayIncorrect.textContent = "Incorrect!";
+//     displayIncorrect.className="correct-or-incorrect";
+//     optionContainerEl.appendChild(displayIncorrect);
 // }
 
 // if (options.length-1 == i) {
@@ -225,4 +195,3 @@ function displayQuiz() {
 // }
 
 btnStartEl.addEventListener("click", countdown);
-// btnStartEl.addEventListener('click', displayQuiz);
