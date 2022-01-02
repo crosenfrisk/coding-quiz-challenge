@@ -8,18 +8,25 @@
 //  Score is equivalent to time remaining. If timer reaches zero, score is zero; suggest player try again to improve their score.
 //  Player can view and clear leader-board, or return to the start screen to play again.
 
-var timeRemaining = 5; // TODO: update to 75 seconds!!
+var timeRemaining = 75;
 var timerEl = document.getElementById("timerDiv");
 var btnStartEl = document.getElementById("btnStart");
+
+
+var incorrectAnswerEl = document.querySelector('.incorrect');
+var correctAnswerEl = document.querySelector('.correct');
 
 function displayTimeRemaining() {
   timerEl.innerHTML = timeRemaining;
   if (timeRemaining == 0) {
     clearInterval();
+
     // call function for endQuiz() // which will send player to high scores / initial input page.
   } else {
     timeRemaining--;
   }
+  setTimeout(incorrectAnswerEl.setAttribute('style', "display: none"), 3000)
+  setTimeout(correctAnswerEl.setAttribute('style', "display: none"), 3000)
 }
 
 function countdown() {
@@ -51,14 +58,9 @@ function displayQuiz() {
   var newH1 = document.createElement("h1");
   newH1.setAttribute("id", "questionNumber");
 
-  newH1.textContent = "Question # " + myQuestions[0].questionNumber;
-  headers.appendChild(newH1);
-
   //  Add new H2
   var newH2 = document.createElement("h2");
   newH2.setAttribute("id", "questionText");
-  newH2.textContent = myQuestions[0].question;
-  headers.appendChild(newH2);
 
   // Location for option buttons
   var optionContainerEl = document.querySelector("#option-container");
@@ -74,21 +76,81 @@ function displayQuiz() {
   btnOption3.className = "btn btn-primary mt-5 btn-lg";
   btnOption4.className = "btn btn-primary mt-5 btn-lg";
 
-  btnOption1.textContent = myQuestions[0].option.A;
-  btnOption2.textContent = myQuestions[0].option.B;
-  btnOption3.textContent = myQuestions[0].option.C;
-  btnOption4.textContent = myQuestions[0].option.D;
+  //   for (var i = 0; i < option.length; i++){
+  cycleQuestionsAndOptions(
+    0,
+    newH1,
+    newH2,
+    optionContainerEl,
+    btnOption1,
+    btnOption2,
+    btnOption3,
+    btnOption4
+  );
+  //   }
+}
+
+function evaluateAnswer(event, correctAnswer, pramQuestionNumber){
+
+  if (event.target.textContent[pramQuestionNumber] != correctAnswer) {
+    timeRemaining -= 10;
+    //display incorrect
+    incorrectAnswerEl.setAttribute("style", "");
+    } else {
+    correctAnswerEl.setAttribute("style", "");
+    }
+}
+
+function cycleQuestionsAndOptions(
+  pramQuestionNumber,
+  newH1,
+  newH2,
+  optionContainerEl,
+  btnOption1,
+  btnOption2,
+  btnOption3,
+  btnOption4
+) {
+  newH1.textContent =
+    "Question # " + myQuestions[pramQuestionNumber].questionNumber;
+  headers.appendChild(newH1);
+
+  newH2.textContent = myQuestions[pramQuestionNumber].question;
+  headers.appendChild(newH2);
+
+  btnOption1.textContent = myQuestions[pramQuestionNumber].option.A;
+  btnOption2.textContent = myQuestions[pramQuestionNumber].option.B;
+  btnOption3.textContent = myQuestions[pramQuestionNumber].option.C;
+  btnOption4.textContent = myQuestions[pramQuestionNumber].option.D;
+
+  btnOption1.setAttribute("id", "option" + 1);
+  btnOption2.setAttribute("id", "option" + 2);
+  btnOption3.setAttribute("id", "option" + 3);
+  btnOption4.setAttribute("id", "option" + 4);
 
   optionContainerEl.appendChild(btnOption1);
   optionContainerEl.appendChild(btnOption2);
   optionContainerEl.appendChild(btnOption3);
   optionContainerEl.appendChild(btnOption4);
 
-  cycleQuestionsAndOptions(0);
-}
+  var correctAnswer = myQuestions[pramQuestionNumber].correctAnswer;
+  console.log(correctAnswer, "hello?");
 
-function cycleQuestionsAndOptions(pramQuestionNumber) {
+  btnOption2.addEventListener("click", (event) => {
+    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+  });
+  btnOption3.addEventListener("click", (event) => {
+    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+  });
+  btnOption1.addEventListener("click", (event) => {
+    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+  });
+  btnOption4.addEventListener("click", (event) => {
+    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+  });
+}
   // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
+
   // var questionTextEl = document.getElementById("#questionText");
   // var questionNumberEl = document.getElementById("#questionNumber");
   // var questionNumber = -1;
@@ -107,7 +169,6 @@ function cycleQuestionsAndOptions(pramQuestionNumber) {
   //       }
   //       cycleQuestionsAndOptions();
   //     });
-}
 
 // Display "correct"  or "incorrect" after page advances to next question; deduct time from timer if incorrect.
 
