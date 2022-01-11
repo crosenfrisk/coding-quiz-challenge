@@ -1,11 +1,5 @@
 //  JAVASCRIPT CODING QUIZ
 
-//  Start Quiz button starts timer at 75 seconds and counts down to zero, meanwhile questions initiate.
-//  Penalties from wrong answers deduct an additional 10 seconds from the clock.
-//  After all questions are answered OR timer runs out:
-//  "Game over!"" message displays
-//  Player adds initials and leader-board is updated.
-//  Score is equivalent to time remaining. If timer reaches zero, score is zero; suggest player try again to improve their score.
 //  Player can view and clear leader-board, or return to the start screen to play again.
 
 var timeRemaining = 75;
@@ -16,24 +10,30 @@ var btnStartEl = document.getElementById("btnStart");
 var incorrectAnswerEl = document.querySelector('.incorrect');
 var correctAnswerEl = document.querySelector('.correct');
 
-function displayTimeRemaining() {
-  timerEl.innerHTML = timeRemaining;
-  if (timeRemaining == 0) {
-    clearInterval();
-
-    // call function for endQuiz() // which will send player to high scores / initial input page.
-  } else {
-    timeRemaining--;
-  }
-  setTimeout(incorrectAnswerEl.setAttribute('style', "display: none"), 3000)
-  setTimeout(correctAnswerEl.setAttribute('style', "display: none"), 3000)
-}
+//  Start Quiz button starts timer at 75 seconds and counts down to zero, meanwhile questions initiate.
 
 function countdown() {
   //   Start timer
   var timerId = setInterval(displayTimeRemaining, 1000);
   removeWelcomePage();
   displayQuiz();
+}
+
+function displayTimeRemaining() {
+  timerEl.innerHTML = timeRemaining;
+  // conditions for ending quiz:
+
+  if (timeRemaining == 0) {
+     // ^ insert: || questionNumber+1 > myQuestions.length || questionNumber === 'end') -- add "end" to quiz.js
+    clearInterval();
+
+    //  After all questions are answered OR timer runs out: "Game over!"" message displays
+    // Call function for endQuiz() // which will send player to high scores / initial input page.
+  } else {
+    timeRemaining--;
+  }
+  setTimeout(incorrectAnswerEl.setAttribute('style', "display: none"), 5000)
+  setTimeout(correctAnswerEl.setAttribute('style', "display: none"), 5000)
 }
 
 function removeWelcomePage() {
@@ -76,7 +76,6 @@ function displayQuiz() {
   btnOption3.className = "btn btn-primary mt-5 btn-lg";
   btnOption4.className = "btn btn-primary mt-5 btn-lg";
 
-  //   for (var i = 0; i < option.length; i++){
   cycleQuestionsAndOptions(
     0,
     newH1,
@@ -87,21 +86,30 @@ function displayQuiz() {
     btnOption3,
     btnOption4
   );
-  //   }
+  
 }
 
 function evaluateAnswer(event, correctAnswer, pramQuestionNumber){
-
+  
   if (event.target.textContent[pramQuestionNumber] != correctAnswer) {
+    //  Penalties from wrong answers deduct an additional 10 seconds from the clock.
     timeRemaining -= 10;
-    //display incorrect
+    // display incorrect
     incorrectAnswerEl.setAttribute("style", "");
     } else {
+      // display correct
     correctAnswerEl.setAttribute("style", "");
     }
+    // call to advance?
+    // cycleQuestionsAndOptions();
 }
 
 function cycleQuestionsAndOptions(
+    // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
+    // Where/do I add a for() loop here to cycle through questions?
+    // for (var i =0; i < myQuestions.length; I++){
+    //  ...
+    // }
   pramQuestionNumber,
   newH1,
   newH2,
@@ -134,7 +142,7 @@ function cycleQuestionsAndOptions(
   optionContainerEl.appendChild(btnOption4);
 
   var correctAnswer = myQuestions[pramQuestionNumber].correctAnswer;
-  console.log(correctAnswer, "hello?");
+  // console.log(correctAnswer, "hello?");
 
   btnOption2.addEventListener("click", (event) => {
     evaluateAnswer(event, correctAnswer, pramQuestionNumber);
@@ -149,7 +157,7 @@ function cycleQuestionsAndOptions(
     evaluateAnswer(event, correctAnswer, pramQuestionNumber);
   });
 }
-  // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
+
 
   // var questionTextEl = document.getElementById("#questionText");
   // var questionNumberEl = document.getElementById("#questionNumber");
@@ -172,13 +180,6 @@ function cycleQuestionsAndOptions(
 
 // Display "correct"  or "incorrect" after page advances to next question; deduct time from timer if incorrect.
 
-//// This is new: not sure if it will work:
-// function displayCorrect(on) {
-//     var answerKey = document.getElementById('#correct-or-incorrect');
-//     answerKey.style['display'] = on ? 'block': 'none';
-//     answerKey(true);
-//     answerKey(false);
-
 //     var displayCorrect = document.createElement("p");
 //     displayCorrect.textContent = "Correct!";
 //     displayCorrect.className= "correct-or-incorrect";
@@ -196,6 +197,7 @@ function cycleQuestionsAndOptions(
 // }
 
 // function endQuiz(event){
+  //  Player adds initials and leader-board is updated.
 //     var endQuizContainerEl = document.getElementById('h1');
 //     var endQuizMessageEl = document.getElementById('h2');
 //     var playerInitialsEl = document.createElement('input');
@@ -238,21 +240,15 @@ function cycleQuestionsAndOptions(
 // }
 
 // function enterHighScore() {
+  //  Player adds initials and leader-board is updated.
 // user enters initials
 // var userFormEl = document.querySelector("#user-form");
 // var nameInputEl = document.querySelector("#user-input");
+
+//  Score is equivalent to time remaining. If timer reaches zero, score is zero; suggest player try again to improve their score.
 // score is saved
 // all scores are returned and displayed
 // }
 
-// if (window.location.pathname.includes("quiz.html")) {
-//     var timerId = setInterval(countdown, 1000);
-//     displayQuiz();
-//     // endQuiz();
-// }
-
-// if (window.location.pathname.includes("highscores.html")) {
-//     loadHighScores();
-// }
-
 btnStartEl.addEventListener("click", countdown);
+// create event listener for viewhighscores on click.
