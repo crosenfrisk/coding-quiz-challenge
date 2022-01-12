@@ -180,21 +180,6 @@ function cycleQuestionsAndOptions(
 
 // Display "correct"  or "incorrect" after page advances to next question; deduct time from timer if incorrect.
 
-//     var displayCorrect = document.createElement("p");
-//     displayCorrect.textContent = "Correct!";
-//     displayCorrect.className= "correct-or-incorrect";
-
-//     optionContainerEl.addEventListener("click", displayCorrect);
-
-//     var displayIncorrect = document.createElement("p");
-//     displayIncorrect.textContent = "Incorrect!";
-//     displayIncorrect.className="correct-or-incorrect";
-//     optionContainerEl.appendChild(displayIncorrect);
-// }
-
-// if (options.length-1 == i) {
-//     endQuiz();
-// }
 
 // function endQuiz(event){
   //  Player adds initials and leader-board is updated.
