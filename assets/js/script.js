@@ -2,9 +2,9 @@
 
 //  Player can view and clear leader-board, or return to the start screen to play again.
 
-var timeRemaining = 75;
+// var timeRemaining = 75;
 var timerEl = document.getElementById("timerDiv");
-var btnStartEl = document.getElementById("btnStart");
+// var btnStartEl = document.getElementById("btnStart");
 
 
 var incorrectAnswerEl = document.querySelector('.incorrect');
@@ -14,27 +14,27 @@ var correctAnswerEl = document.querySelector('.correct');
 
 function countdown() {
   //   Start timer
-  var timerId = setInterval(displayTimeRemaining, 1000);
+  // var timerId = setInterval(displayTimeRemaining, 1000);
   removeWelcomePage();
   displayQuiz();
 }
 
-function displayTimeRemaining() {
-  timerEl.innerHTML = timeRemaining;
-  // conditions for ending quiz:
+// function displayTimeRemaining() {
+//   timerEl.innerHTML = timeRemaining;
+//   // conditions for ending quiz:
 
-  if (timeRemaining == 0) {
-     // ^ insert: || questionNumber+1 > myQuestions.length || questionNumber === 'end') -- add "end" to quiz.js
-    clearInterval();
+//   if (timeRemaining == 0) {
+//      // ^ insert: || questionNumber+1 > myQuestions.length || questionNumber === 'end') -- add "end" to quiz.js
+//     clearInterval();
 
-    //  After all questions are answered OR timer runs out: "Game over!"" message displays
-    // Call function for endQuiz() // which will send player to high scores / initial input page.
-  } else {
-    timeRemaining--;
-  }
+//     //  After all questions are answered OR timer runs out: "Game over!"" message displays
+//     // Call function for endQuiz() // which will send player to high scores / initial input page.
+//   } else {
+//     timeRemaining--;
+//   }
   setTimeout(incorrectAnswerEl.setAttribute('style', "display: none"), 5000)
   setTimeout(correctAnswerEl.setAttribute('style', "display: none"), 5000)
-}
+// }
 
 function removeWelcomePage() {
   // Remove H1, H2, and Start Buttons; remove "view high scores."
@@ -235,5 +235,5 @@ function cycleQuestionsAndOptions(
 // all scores are returned and displayed
 // }
 
-btnStartEl.addEventListener("click", countdown);
+// btnStartEl.addEventListener("click", countdown);
 // create event listener for viewhighscores on click.
