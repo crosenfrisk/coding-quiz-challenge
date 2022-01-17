@@ -1,10 +1,10 @@
-.view-high-scores a {
+.view-high-scores {
     font-size: medium;
     color: #a281b8;
     cursor: pointer;
 }
 
-.view-high-scores a:hover{
+.view-high-scores:hover{
    font-size: 20px;
    text-decoration: none;
    text-shadow: 2px 2px 8px #470077;
@@ -42,8 +42,8 @@ h2 {
     border: none;
 }
 
-.correct-or-incorrect {
-    font-size: large;
+#evaluation {
+    font-size: 32px;
     font-style: italic;
     font-weight: lighter;
     border-top: 1px dotted grey;

@@ -4,6 +4,7 @@ var timeRemaining = 75;
 var nextQuestion = 0;
 var btnStartEl = document.getElementById("btnStart");
 var parentEl = document.getElementById("parent-row");
+var timer;
 
 // Quiz Questions and Answer Options:
 
@@ -57,12 +58,11 @@ var myQuestions = [
 
 var currentQuestion = myQuestions[nextQuestion];
 
-// 1. Start quiz(){
+// Start quiz(){
 
 //  Unload content from index.html "home" page
 function unloadHome(){
     var homeEl = document.getElementById("home-container");
-    console.log(homeEl);
     homeEl.remove();
 }
 
@@ -72,39 +72,34 @@ function displayTimer() {
   }
 
 function updateTimer(){
-    if (timeRemaining == 0) {
-       clearInterval();
-   
-       //  After all questions are answered OR timer runs out: "Game over!"" message displays
-       // Call function for endQuiz() // which will send player to high scores / initial input page.
-     } else {
+  //After all questions are answered OR timer runs out: endQuiz();
+    if (timeRemaining == 0 || nextQuestion > myQuestions.length) {
+      //  clearInterval();
+       endQuiz();
+     } 
+     
+     else {
        timeRemaining--;
        displayTimer();
      }
 }
 
-//      b.  Call loadQuestion(nextQuestion)
-//      c.  Timer starts --
 function startQuiz(){
     unloadHome();
     loadQuestion(nextQuestion);
-    var timer = setInterval(updateTimer, 1000);
+    // start timer to decrement every second
+    timer = setInterval(updateTimer, 1000);
 }
 
 function loadQuestion(nextQuestion){
-    console.log("entering loadquestion", nextQuestion);
     if (nextQuestion > 0) {
-        console.log("inside if statement");
     unloadQuestion();
     }
 
     createQuestion(nextQuestion);
-    console.log("next qu =", nextQuestion);
 }
 
 function createQuestion(nextQuestion){
-    console.log("inside createQuestion");
-    console.log(currentQuestion);
 
      // Add new H1
   var newH1 = document.createElement("h1");
@@ -201,22 +196,47 @@ var evaluationEl = document.getElementById("evaluation");
 evaluationEl.textContent = evaluation;
 
 evaluationEl.setAttribute("style", "");
-setTimeout( () => {clearEval()}, 3000);
+setTimeout( () => {clearEval()}, 5000);
 }
 
 function endQuiz() {
-    console.log("inside endQuiz");
     unloadQuestion();
+    
+    // stop timer from decrementing any further
+    clearInterval(timer);
+    updateTimer();
+
     loadScoreForm();
 }
 
 function loadScoreForm() {
-    console.log("load-score");
+    // display "All done!" h1
+    // display p: ' "Your final score is" + timerEl.'
+  var allDoneEl = document.createElement("h1");
+  allDoneEl.textContent = "All done!";
+
+  var yourFinalScoreEl = document.createElement("p");
+  yourFinalScoreEl.textContent = "Your final score is " + timeRemaining;
+
+  var instructionsEl = document.createElement ("p");
+  instructionsEl.textContent = "Enter initials:"
+
+  var inputEl = document.createElement("input");
+  var submitBtnEl = document.createElement("button");
+  submitBtnEl.textContent = "Submit";
+
+  parentEl.appendChild(allDoneEl);
+  parentEl.appendChild(yourFinalScoreEl);
+  parentEl.appendChild(instructionsEl);
+  parentEl.appendChild(inputEl);
+  parentEl.appendChild(submitBtnEl);
 }
 
+// function storeScore(){
+//   localStorage.inputEl = 
+// }
 // Additional functions:
 
-//  endQuiz = if quiz is over, unload questions and load score form
 //  scoreForm = input from user saved to local storage
 //  displayHighScores = get info from local storage and generate on to html
 //  createButtons for clearing info from local storage, option to return to start page to play again
