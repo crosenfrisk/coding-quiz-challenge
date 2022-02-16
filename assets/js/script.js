@@ -1,60 +1,107 @@
-//  JAVASCRIPT CODING QUIZ
+// New pseudocode for resubmission of project
 
-//  Player can view and clear leader-board, or return to the start screen to play again.
+var timeRemaining = 75;
+var nextQuestion = 0;
+var btnStartEl = document.getElementById("btnStart");
+var parentEl = document.getElementById("parent-row");
+var timer;
+var score;
 
-// var timeRemaining = 75;
-var timerEl = document.getElementById("timerDiv");
-// var btnStartEl = document.getElementById("btnStart");
+// Quiz Questions and Answer Options:
 
+var myQuestions = [
+    {
+      questionNumber: 1,
+      question:
+        "Inside the HTML document, where do you place your JavaScript code?",
+      option: {
+        A: "A : Inside the `link` element",
+        B: "B : Inside the `script` element",
+        C: "C : Inside the `head` element",
+        D: "D : In the `footer` element",
+      },
+      correctAnswer: "D",
+    },
+    {
+      questionNumber: 2,
+      question: "What operator is used to assign a value to a declared variable?",
+      option: {
+        A: "A : Question mark (?)",
+        B: "B : Double-equal (==)",
+        C: "C : Equal sign (=)",
+        D: "D : Colon (:)",
+      },
+      correctAnswer: "C",
+    },
+    {
+      questionNumber: 3,
+      question: "What are the six primitive data types in JavaScript?",
+      option: {
+        A: "A : sentence, float, data, bigInt, symbol, undefined",
+        B: "B : string, num, falsy, bigInt, symbol, undefined",
+        C: "C : sentence, int, truthy, bigInt, symbol, undefined",
+        D: "D : string, number, boolean, bigInt, symbol, undefined",
+      },
+      correctAnswer: "D",
+    },
+    {
+      questionNumber: 4,
+      question: "What is the difference between && and ||? ",
+      option: {
+        A: "A : The logical operator && returns true if none of the expressions are true while the logical operator || returns true if one expression or the other returns true.",
+        B: "B : The logical operator && returns true if both expressions are true while the logical operator || returns false if one expression or the other returns true.",
+        C: "C : The logical operator && returns true if one expression is true while the logical operator || returns true if both expressions return true true.",
+        D: "D : The logical operator && returns true if both expressions are true while the logical operator || returns true if one expression or the other returns true.",
+      },
+      correctAnswer: "D",
+    },
+  ];
 
-var incorrectAnswerEl = document.querySelector('.incorrect');
-var correctAnswerEl = document.querySelector('.correct');
+var currentQuestion = myQuestions[nextQuestion];
 
-//  Start Quiz button starts timer at 75 seconds and counts down to zero, meanwhile questions initiate.
+// Start quiz(){
 
-function countdown() {
-  //   Start timer
-  // var timerId = setInterval(displayTimeRemaining, 1000);
-  removeWelcomePage();
-  displayQuiz();
+//  Unload content from index.html "home" page
+function unloadHome(){
+    var homeEl = document.getElementById("home-container");
+    homeEl.remove();
 }
 
-// function displayTimeRemaining() {
-//   timerEl.innerHTML = timeRemaining;
-//   // conditions for ending quiz:
+function displayTimer() {
+    var timerEl = document.getElementById("timerDiv");
+    timerEl.innerHTML = timeRemaining;
+  }
 
-//   if (timeRemaining == 0) {
-//      // ^ insert: || questionNumber+1 > myQuestions.length || questionNumber === 'end') -- add "end" to quiz.js
-//     clearInterval();
-
-//     //  After all questions are answered OR timer runs out: "Game over!"" message displays
-//     // Call function for endQuiz() // which will send player to high scores / initial input page.
-//   } else {
-//     timeRemaining--;
-//   }
-  setTimeout(incorrectAnswerEl.setAttribute('style', "display: none"), 5000)
-  setTimeout(correctAnswerEl.setAttribute('style', "display: none"), 5000)
-// }
-
-function removeWelcomePage() {
-  // Remove H1, H2, and Start Buttons; remove "view high scores."
-
-  var oldH1 = document.querySelector("#bold-statement");
-  var oldH2 = document.querySelector("#smaller-text");
-  var startBtn = document.querySelector("#btnStart");
-  var viewHighScores = document.querySelector("#view-high-scores");
-
-  oldH1.remove();
-  oldH2.remove();
-  startBtn.remove();
-  viewHighScores.remove();
+function updateTimer(){
+  //After all questions are answered OR timer runs out: endQuiz();
+    if (timeRemaining == 0 || nextQuestion > myQuestions.length) {
+      //  clearInterval();
+       endQuiz();
+     } 
+     
+     else {
+       timeRemaining--;
+       displayTimer();
+     }
 }
 
-function displayQuiz() {
-  //  Location for new H1 and H2
-  var headers = document.querySelector("#headers");
+function startQuiz(){
+    unloadHome();
+    loadQuestion(nextQuestion);
+    // start timer to decrement every second
+    timer = setInterval(updateTimer, 1000);
+}
 
-  // Add new H1
+function loadQuestion(nextQuestion){
+    if (nextQuestion > 0) {
+    unloadQuestion();
+    }
+    createQuestion(nextQuestion);
+}
+
+function createQuestion(nextQuestion){
+
+     // Add new H1
   var newH1 = document.createElement("h1");
   newH1.setAttribute("id", "questionNumber");
 
@@ -62,10 +109,12 @@ function displayQuiz() {
   var newH2 = document.createElement("h2");
   newH2.setAttribute("id", "questionText");
 
-  // Location for option buttons
-  var optionContainerEl = document.querySelector("#option-container");
+  // create div to hold buttons for styling
+  var createDivEl = document.createElement("div");
+  createDivEl.className= "btn-group-vertical";
+  parentEl.appendChild(createDivEl);
 
-  // Add button "option" elements (that hold questions)
+// Add button "option" elements (that hold questions)
   var btnOption1 = document.createElement("button");
   var btnOption2 = document.createElement("button");
   var btnOption3 = document.createElement("button");
@@ -76,164 +125,198 @@ function displayQuiz() {
   btnOption3.className = "btn btn-primary mt-5 btn-lg";
   btnOption4.className = "btn btn-primary mt-5 btn-lg";
 
-  cycleQuestionsAndOptions(
-    0,
-    newH1,
-    newH2,
-    optionContainerEl,
-    btnOption1,
-    btnOption2,
-    btnOption3,
-    btnOption4
-  );
-  
-}
-
-function evaluateAnswer(event, correctAnswer, pramQuestionNumber){
-  
-  if (event.target.textContent[pramQuestionNumber] != correctAnswer) {
-    //  Penalties from wrong answers deduct an additional 10 seconds from the clock.
-    timeRemaining -= 10;
-    // display incorrect
-    incorrectAnswerEl.setAttribute("style", "");
-    } else {
-      // display correct
-    correctAnswerEl.setAttribute("style", "");
-    }
-    // call to advance?
-    // cycleQuestionsAndOptions();
-}
-
-function cycleQuestionsAndOptions(
-    // Display questions one at a time. User selects answer from options a, b, c, d. Whether answer is correct or not, questions advance.
-    // Where/do I add a for() loop here to cycle through questions?
-    // for (var i =0; i < myQuestions.length; I++){
-    //  ...
-    // }
-  pramQuestionNumber,
-  newH1,
-  newH2,
-  optionContainerEl,
-  btnOption1,
-  btnOption2,
-  btnOption3,
-  btnOption4
-) {
+// content for newH1
   newH1.textContent =
-    "Question # " + myQuestions[pramQuestionNumber].questionNumber;
-  headers.appendChild(newH1);
+    "Question # " + myQuestions[nextQuestion].questionNumber;
+  createDivEl.appendChild(newH1);
 
-  newH2.textContent = myQuestions[pramQuestionNumber].question;
-  headers.appendChild(newH2);
+  newH2.textContent = myQuestions[nextQuestion].question;
+  createDivEl.appendChild(newH2);
 
-  btnOption1.textContent = myQuestions[pramQuestionNumber].option.A;
-  btnOption2.textContent = myQuestions[pramQuestionNumber].option.B;
-  btnOption3.textContent = myQuestions[pramQuestionNumber].option.C;
-  btnOption4.textContent = myQuestions[pramQuestionNumber].option.D;
+  btnOption1.textContent = myQuestions[nextQuestion].option.A;
+  btnOption2.textContent = myQuestions[nextQuestion].option.B;
+  btnOption3.textContent = myQuestions[nextQuestion].option.C;
+  btnOption4.textContent = myQuestions[nextQuestion].option.D;
 
-  btnOption1.setAttribute("id", "option" + 1);
-  btnOption2.setAttribute("id", "option" + 2);
-  btnOption3.setAttribute("id", "option" + 3);
-  btnOption4.setAttribute("id", "option" + 4);
+  btnOption1.setAttribute("id", "A");
+  btnOption2.setAttribute("id", "B");
+  btnOption3.setAttribute("id", "C");
+  btnOption4.setAttribute("id", "D");
 
-  optionContainerEl.appendChild(btnOption1);
-  optionContainerEl.appendChild(btnOption2);
-  optionContainerEl.appendChild(btnOption3);
-  optionContainerEl.appendChild(btnOption4);
-
-  var correctAnswer = myQuestions[pramQuestionNumber].correctAnswer;
-  // console.log(correctAnswer, "hello?");
+  createDivEl.appendChild(btnOption1);
+  createDivEl.appendChild(btnOption2);
+  createDivEl.appendChild(btnOption3);
+  createDivEl.appendChild(btnOption4);
 
   btnOption2.addEventListener("click", (event) => {
-    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+    evaluateAnswer(event);
   });
   btnOption3.addEventListener("click", (event) => {
-    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+    evaluateAnswer(event);
   });
   btnOption1.addEventListener("click", (event) => {
-    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+    evaluateAnswer(event);
   });
   btnOption4.addEventListener("click", (event) => {
-    evaluateAnswer(event, correctAnswer, pramQuestionNumber);
+    evaluateAnswer(event);
   });
+  
 }
 
+function unloadQuestion(){
+    // removes question contents from quiz page
+    parentEl.replaceChildren();
+}
 
-  // var questionTextEl = document.getElementById("#questionText");
-  // var questionNumberEl = document.getElementById("#questionNumber");
-  // var questionNumber = -1;
-  // console.log(pramQuestionNumber);
-  // questionNumber += 1;
-  //   var q = myQuestions[questionNumber];
-  //   var options = Object.entries(q.option);
-  //   var correctAnswer = myQuestions[questionNumber].correctAnswer;
-  //   questionTextEl.innerHTML = q.question;
-  //   for (var i = 0; i < options.length; i++) {
-  //     var option = document.getElementById("option" + (i + 1));
-  // option.innerHTML = options[i][0] + " : " + options[i][1];
-  //     option.addEventListener("click", function (event) {
-  //       if (event.target.textContent[0] != correctAnswer) {
-  //         timeRemaining -= 10;
-  //       }
-  //       cycleQuestionsAndOptions();
-  //     });
+function evaluateAnswer(event){
+    
+    if (currentQuestion.correctAnswer === event.target.id){
+        displayEval("Correct");
+    }
 
-// Display "correct"  or "incorrect" after page advances to next question; deduct time from timer if incorrect.
+    else {
+        displayEval("Incorrect");
+        // adjust timer for incorrect -10
+        timeRemaining -=10;
+    }
 
+    nextQuestion += 1;
 
-// function endQuiz(event){
-  //  Player adds initials and leader-board is updated.
-//     var endQuizContainerEl = document.getElementById('h1');
-//     var endQuizMessageEl = document.getElementById('h2');
-//     var playerInitialsEl = document.createElement('input');
-//     var submitButtonEl = document.getElementById('btnStart');
+    if (timeRemaining > 0 && nextQuestion < myQuestions.length) { 
+        // load next question
+        loadQuestion(nextQuestion)
+    }
+    else {
+        endQuiz()
+    };
+}
 
-//     if (timeRemaining === 0 || options.length-1 == i){
-//         endQuizContainerEl.textContent = "The Quiz is Over!"
-//         endQuizMessageEl.textContent = "Please enter your initials to save your score:";
-//         document.body.main.append(playerInitialsEl); //?
-//         submitButtonEl.textContent = "Submit";
-//     }
+function clearEval(){
+    var evaluationEl = document.getElementById("evaluation");
+    evaluationEl.setAttribute('style', "display: none");
+}
 
-//  Check localStorage for high score, if it's not there, use 0
-//  var highScore = localStorage.getItem("highscore");
-//  var alertNewHighScore = playerInitials + " now has the high score of " + timerEl + "!");
-//  if (timerEl === null) {
-//  highScore = 0;
-//  }
+function displayEval(evaluation) {
+var evaluationEl = document.getElementById("evaluation");
+evaluationEl.textContent = evaluation;
 
-// If player has more time than the high score, player has new high score!
-//  if (timerEl > highScore) {
-//  localStorage.setItem("highscore", timerEl);
-//  localStorage.setItem("name", playerInitials);
-//  }
-//  else {
-// var alert = playerInitials + " did not beat the high score of " + highScore + ". Maybe next time!";
-//  }
+evaluationEl.setAttribute("style", "");
+setTimeout( () => {clearEval()}, 5000);
+}
 
-//     Ask player if they'd like to play again
-//     var quizAgainConfirm = create div with question "Would you like to try the quiz again?"
+function endQuiz() {
+    unloadQuestion();
+    
+    // stop timer from decrementing any further
+    clearInterval(timer);
+    updateTimer();
 
-//     if (quizAgainConfirm) {
-//       displayQuiz();
-//     }
-//     else {
-//       create div that says "Thank you for completing our JavaScript quiz.Come back soon!")
-//     }
-//   };
+    loadScoreForm();
+}
 
-// }
+function loadScoreForm() {
+    // Display "All done!" message, list score and ask user to enter initials.
+  var allDoneEl = document.createElement("h1");
+  allDoneEl.textContent = "All done!";
+  allDoneEl.className = "mt-5 justify-content-center col-sm-12 col-lg-12";
 
-// function enterHighScore() {
-  //  Player adds initials and leader-board is updated.
-// user enters initials
-// var userFormEl = document.querySelector("#user-form");
-// var nameInputEl = document.querySelector("#user-input");
+  var yourFinalScoreEl = document.createElement("h2");
+  yourFinalScoreEl.textContent = "Your final score is " + timeRemaining +  ".";
+  yourFinalScoreEl.className = "mt-5 justify-content-center text-center";
 
-//  Score is equivalent to time remaining. If timer reaches zero, score is zero; suggest player try again to improve their score.
-// score is saved
-// all scores are returned and displayed
-// }
+  var instructionsEl = document.createElement("h2");
+  instructionsEl.textContent = "Please enter your initials:";
+  instructionsEl.className ="mt-5 justify-content-center text-center";
+  instructionsEl.id = "instructions";
 
-// btnStartEl.addEventListener("click", countdown);
-// create event listener for viewhighscores on click.
+  var inputEl = document.createElement("input");
+
+  var submitBtnEl = document.createElement("button");
+  submitBtnEl.textContent = "Submit";
+  submitBtnEl.id ="submitBtn";
+
+  var children = [allDoneEl, yourFinalScoreEl, instructionsEl, inputEl, submitBtnEl];
+
+  for (var i = 0; i < children.length; i++ ){
+    parentEl.appendChild(children[i]);
+  }
+
+  submitBtnEl.addEventListener("click", function(e) {
+
+    // Prevent browser from refreshing on submit
+    e.preventDefault();
+    // Save the user's initials and final score as an object
+    let score = {
+      name: inputEl.value,
+      score: timeRemaining
+    };
+
+    // Save user's score to local storage
+    storeScore(score);
+    // Display high scores
+    displayHighScores(score);
+    
+  });
+};
+
+function storeScore(score){
+  // Score of quiz is based on time remaining
+  score = timeRemaining;
+  // If no scores are currently being saved in the leader board
+  if (!localStorage.scores){
+    // Create an empty array to store the scores in
+    let scores = [];
+    // Push the current score to the empty array
+    scores.push(score);
+    // Stringify the array and set it with the key "scores" in local storage
+    localStorage.setItem('scores', JSON.stringify(scores));
+  } else {
+    // If there are currently scores stored in the array, parse the scores and save new score with existing array
+    let scoresArray = JSON.parse(localStorage.scores);
+    // Add the new score to beginning of the array
+    scoresArray.unshift(score);
+    // Stringify the new array and save it in place of the previous array.
+    localStorage.scores = JSON.stringify(scoresArray);
+  }
+ 
+}
+
+function saveInitials(){
+  var inputEl = document.createElement("input"); 
+  var initials = inputEl;
+  localStorage.setItem("initials", JSON.stringify(initials));
+}
+
+function scoreForm(){
+  saveInitials();
+  storeScore();
+}
+
+function displayHighScores(score){
+// Create a div to store the scores
+let scoresContainer = document.createElement('div');
+parentEl.append(scoresContainer);
+
+  // If there are scores saved
+  if (localStorage.length){
+    // Load scores by parsing scores from localStorage
+    let scores = JSON.parse(localStorage.scores || 'No Scores to Display');
+    // Loop through scores in the array
+    for (let i = 0; i < scores.length; i ++){
+      // Display initials and scores
+      let text = `${scores[i].name}` + `${scores[i].score}`;
+      // Display text (initials and score) in a p element dynamically
+      let scoreItem = document.createElement('p');
+      scoreItem.textContent = text;
+      // Append to the list of scores
+      scoresContainer.appendChild(scoreItem);
+    }
+  }
+  localStorage.getItem("initials", score);
+}
+
+// Additional functions:
+//  displayHighScores = get info from local storage and generate on to html
+//  createButtons for clearing info from local storage, option to return to start page to play again
+
+btnStartEl.addEventListener("click", startQuiz);

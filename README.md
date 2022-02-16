@@ -6,7 +6,7 @@
 *[Challenges Faced](#Challenges-Faced)
 *[What I Enjoyed!](#What-I-Enjoyed)
 *[Credits](Credits)
-*[Online Resources](Online-Rescoures)
+*[Online Resources](Online-Resources)
 *[License](License)
 ### About the Project
 
@@ -20,23 +20,26 @@ https://crosenfrisk.github.io/coding-quiz-challenge/
 
 ### Challenges Faced
 
-I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned.
+In December, I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned. I was able to fix this in January.
 
-Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visable on html page *at times only one object would display while others disappeared* Thankfully this is now fixed.
+Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visible on html page *at times only one object would display while others disappeared* Thankfully this has also been fixed.
 
-Getting the leaderboard up and running meant revisiting course material from week 3 lesson 5.8. I realized upon reading it that I struggled with the material the first time around, so it doesn't surprise me now when working with this project that I have not yet been able to complete this portion of the assignment. ** I do plan to update after I spend some more time reviewing the material and meeting with my tutor this week and next .**
-
+*Update 2/16/22: Local storage is still an area that I struggle with. It has been almost a month since my last work on this project. I am submitting what I have with the hope that I can still get help from my tutor to complete the last leg of this project with regard to the high score page.*
 
 ### What I Enjoyed
 
 I enjoyed using Bootstrap for the first time and liked setting up my hmtl pages. I decided to use multiple pages rather than hiding and then revealing elements via CSS because it lead to a clearer back-end experience for me as the developer. Each page had its purpose. 
 
-`index.html ` was the landing page where the user could see they had options to either `Start Game!` or `View High Scores` and be directed to the respective pages. `quiz.html` stored the html layout for the quiz with vertical button elements and the timer in the nav section, while `highscores.html` was simply for viewing/storing user input *initials* along with score.
+Initially I created three html pages: `index.html ` was the landing page where the user could see they had options to either `Start Game!` or `View High Scores` and be directed to the respective pages. `quiz.html` stored the html layout for the quiz with vertical button elements and the timer in the nav section, while `highscores.html` was simply for viewing/storing user input *initials* along with score.
 
-Peers in my cohort approached the project in a variety of ways, which I am excited to learn more about.
+*Update 2/16/22: After I learned about dynamically generating divs, I did away with the three pages and their links, and simply used `index.html` to display the landing page, quiz, and then high score page.*
 ### Credits
 
-I had help from Google, W3Schools, MDN, and classmates Colin and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
+During the initial creation phase of this project, I had help from Google, W3Schools, MDN, and classmates Colin and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
+
+*Update 2/16/22: My second iteration of the project involved creating a new white board to detail the flow of the project. @AndrewRosenfrisk discussed the importance of parameters with me and was a good listener any time I got stuck.*
+
+![new white board](assets/images/whiteboard2.jpg) 
 
 ### Online Resources
 
