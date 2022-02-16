@@ -215,7 +215,7 @@ function endQuiz() {
 }
 
 function loadScoreForm() {
-    // Display "All done!" message, list score and ask user to enter initials.
+    // Display "All done!" message, display score and ask user to enter initials.
   var allDoneEl = document.createElement("h1");
   allDoneEl.textContent = "All done!";
   allDoneEl.className = "mt-5 justify-content-center col-sm-12 col-lg-12";
@@ -281,18 +281,22 @@ function storeScore(score){
  
 }
 
-function saveInitials(){
-  var inputEl = document.createElement("input"); 
-  var initials = inputEl;
-  localStorage.setItem("initials", JSON.stringify(initials));
-}
+// function saveInitials(){
+//   var inputEl = document.createElement("input"); 
+//   var initials = inputEl;
+//   localStorage.setItem("initials", JSON.stringify(initials));
+// }
 
-function scoreForm(){
-  saveInitials();
-  storeScore();
-}
+// function scoreForm(){
+//   saveInitials();
+//   storeScore();
+// }
 
 function displayHighScores(score){
+// Remove h1/h2 and just display leader board
+parentEl.style.display = 'none';
+main.innerHTML = '';
+
 // Create a div to store the scores
 let scoresContainer = document.createElement('div');
 parentEl.append(scoresContainer);
