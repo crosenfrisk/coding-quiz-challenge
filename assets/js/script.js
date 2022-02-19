@@ -1,4 +1,4 @@
-// New pseudocode for resubmission of project
+// JavaScript Timed Quiz -- 2.0
 
 var timeRemaining = 75;
 var nextQuestion = 0;
