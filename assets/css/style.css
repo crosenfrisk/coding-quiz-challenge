@@ -61,3 +61,10 @@ input {
     height: 50px;
     align-items: right;
 }
+
+/* .container-scores{
+    display: inline;
+    margin: auto;
+    align-items: center;
+    justify-items: flex-start;
+} */

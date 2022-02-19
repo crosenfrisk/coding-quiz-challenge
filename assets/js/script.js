@@ -67,11 +67,14 @@ function unloadHome(){
     homeEl.remove();
 }
 
+// Set timer to display on page, then countdown begins with startQuiz();
 function displayTimer() {
     var timerEl = document.getElementById("timerDiv");
     timerEl.innerHTML = timeRemaining;
   }
 
+// Timer will decrement each second until time runs out or have additional time
+// removed if answer is wrong in the evaluateAnswer() function;
 function updateTimer(){
   //After all questions are answered OR timer runs out: endQuiz();
     if (timeRemaining == 0 || nextQuestion > myQuestions.length) {
@@ -85,6 +88,8 @@ function updateTimer(){
      }
 }
 
+// Clicking button on home screen will lead to the "next page" where we remove the hardcoded html elements
+// and then load the questions using loadQuestion() function.
 function startQuiz(){
     unloadHome();
     loadQuestion(nextQuestion);
@@ -92,6 +97,8 @@ function startQuiz(){
     timer = setInterval(updateTimer, 1000);
 }
 
+// Function will load questions from myQuestions array one at a time
+// using unloadQuestion to remove the current question and move to the next.
 function loadQuestion(nextQuestion){
     if (nextQuestion > 0) {
     unloadQuestion();
@@ -99,6 +106,7 @@ function loadQuestion(nextQuestion){
     createQuestion(nextQuestion);
 }
 
+// Dynamically generates the html of each question, appending it to the #parent-row container of main section.
 function createQuestion(nextQuestion){
 
      // Add new H1
@@ -163,11 +171,14 @@ function createQuestion(nextQuestion){
   
 }
 
+// Removes the previous question in order to load the next question.
 function unloadQuestion(){
     // removes question contents from quiz page
     parentEl.replaceChildren();
 }
 
+// Determines whether the answer is correct or incorrect based on criteria in myQuestions[]
+// if incorrect, deduct additional time as penalty.
 function evaluateAnswer(event){
     
     if (currentQuestion.correctAnswer === event.target.id){
@@ -191,11 +202,13 @@ function evaluateAnswer(event){
     };
 }
 
+// Removes correct/incorrect from display 
 function clearEval(){
     var evaluationEl = document.getElementById("evaluation");
     evaluationEl.setAttribute('style', "display: none");
 }
 
+// Creates element to display and then the time out to remove.
 function displayEval(evaluation) {
 var evaluationEl = document.getElementById("evaluation");
 evaluationEl.textContent = evaluation;
@@ -204,6 +217,7 @@ evaluationEl.setAttribute("style", "");
 setTimeout( () => {clearEval()}, 5000);
 }
 
+// Quiz will end after all questions have been answered OR time has run out.
 function endQuiz() {
     unloadQuestion();
     
@@ -214,8 +228,10 @@ function endQuiz() {
     loadScoreForm();
 }
 
+// Load Score Form will display after quiz has ended.
 function loadScoreForm() {
-    // Display "All done!" message, display score and ask user to enter initials.
+    // Display "All done!" message
+    // Display score and ask user to enter initials to save score to local storage.
   var allDoneEl = document.createElement("h1");
   allDoneEl.textContent = "All done!";
   allDoneEl.className = "mt-5 justify-content-center col-sm-12 col-lg-12";
@@ -242,85 +258,108 @@ function loadScoreForm() {
   }
 
   submitBtnEl.addEventListener("click", function(e) {
-
     // Prevent browser from refreshing on submit
     e.preventDefault();
     // Save the user's initials and final score as an object
-    let score = {
-      name: inputEl.value,
-      score: timeRemaining
-    };
+    let score = timeRemaining;
 
     // Save user's score to local storage
-    storeScore(score);
+    storeScore(score, inputEl.value);
     // Display high scores
     displayHighScores(score);
     
   });
 };
 
-function storeScore(score){
-  // Score of quiz is based on time remaining
-  score = timeRemaining;
+// Save score and initials to local storage for persistence and recall on View High Scores page.
+function storeScore(score, initials){
+  // Score of quiz is based on time remaining.
+  
   // If no scores are currently being saved in the leader board
-  if (!localStorage.scores){
-    // Create an empty array to store the scores in
+
+  if (!localStorage.getItem('scores')){
+    
+    // create an empty array to store the scores in
     let scores = [];
+    
     // Push the current score to the empty array
-    scores.push(score);
-    // Stringify the array and set it with the key "scores" in local storage
+    scores.push(initials + ": " + score);
+
+    // then stringify the array and save it with the key "scores" in local storage.
     localStorage.setItem('scores', JSON.stringify(scores));
+
   } else {
-    // If there are currently scores stored in the array, parse the scores and save new score with existing array
+
+    // If there are currently scores stored in the array, parse the scores and save new score with existing array.
     let scoresArray = JSON.parse(localStorage.scores);
-    // Add the new score to beginning of the array
-    scoresArray.unshift(score);
+
+    // Add the new score to beginning of the array.
+    scoresArray.unshift(initials + ": " + score);
+
     // Stringify the new array and save it in place of the previous array.
-    localStorage.scores = JSON.stringify(scoresArray);
+    localStorage.setItem('scores', JSON.stringify(scoresArray));
   }
- 
 }
 
-// function saveInitials(){
-//   var inputEl = document.createElement("input"); 
-//   var initials = inputEl;
-//   localStorage.setItem("initials", JSON.stringify(initials));
-// }
+// Clicking the "View High Scores" button will load high scores to page.
+document.getElementById('view-high-scores').addEventListener('click', displayHighScores);
 
-// function scoreForm(){
-//   saveInitials();
-//   storeScore();
-// }
-
+// Displaying high scores happens after the user inputs their initials and saves their score.
 function displayHighScores(score){
-// Remove h1/h2 and just display leader board
-parentEl.style.display = 'none';
-main.innerHTML = '';
+  // Remove View High Scores from upper left and timer div from upper right, clear other text.
+  document.querySelector('.container').style.display = 'none';
+  document.querySelector('#highScores').style.display = ''
+  document.querySelector('.view-high-scores').style.display = 'none';
+  document.querySelector('.timer').style.display = 'none';
 
-// Create a div to store the scores
-let scoresContainer = document.createElement('div');
-parentEl.append(scoresContainer);
+  // Create a div to display the scores
+  // let scoresContainerEl = document.createElement('div');
+  // parentEl.append(scoresContainerEl);
 
+  const highScores = JSON.parse(localStorage.getItem('scores'));
   // If there are scores saved
-  if (localStorage.length){
+  
+  // find the child/ren of .container-scores if it/they exist
+  if (highScores && typeof highScores === 'object'){
     // Load scores by parsing scores from localStorage
-    let scores = JSON.parse(localStorage.scores || 'No Scores to Display');
+
     // Loop through scores in the array
-    for (let i = 0; i < scores.length; i ++){
+    for (let i = 0; i < highScores.length; i ++){
       // Display initials and scores
-      let text = `${scores[i].name}` + `${scores[i].score}`;
-      // Display text (initials and score) in a p element dynamically
-      let scoreItem = document.createElement('p');
+      let text = highScores[i];      // Display text (initials and score) in a p element dynamically
+      let scoreItem = document.createElement('li');
       scoreItem.textContent = text;
       // Append to the list of scores
-      scoresContainer.appendChild(scoreItem);
+      document.querySelector('.container-scores').appendChild(scoreItem);      
     }
+  } else {
+    // if there are no scores to display return "no scores"
+    document.querySelector('.container-scores').innerHTML = 'No Scores to Display';
   }
-  localStorage.getItem("initials", score);
+
+    // Dynamically add buttons below scores to go back to home page or clear loaded scores on click.
+  
+    // var goBackBtn = document.createElement('button');
+    // goBackBtn.className ="goBack";
+    // goBackBtn.setAttribute("style", "inline");
+  
+    // var clearScoreBtn = document.createElement('button');
+    // clearScoreBtn.className ="clearScoreBtn";
+    // clearScoreBtn.setAttribute("style", "inline");
+
+    // scoresContainerEl.append(goBackBtn);
+    // scoresContainerEl.append(clearScoreBtn);
+
 }
 
-// Additional functions:
-//  displayHighScores = get info from local storage and generate on to html
-//  createButtons for clearing info from local storage, option to return to start page to play again
+function clearScores(score){
+  localStorage.setItem('scores', '[]');
+  const parent = document.querySelector(".container-scores")
+while (parent.lastChild) {
+    parent.lastChild.remove()
+}
+}
+
+document.getElementById('clearScoreBtn').addEventListener('click', clearScores);
 
 btnStartEl.addEventListener("click", startQuiz);
