@@ -5,12 +5,13 @@
 *[View the Project](View-The-Project)
 *[Challenges Faced](#Challenges-Faced)
 *[What I Enjoyed!](#What-I-Enjoyed)
-*[Credits](Credits)
-*[Online Resources](Online-Rescoures)
-*[License](License)
+*[Credits](#Credits)
+*[Online Resources](#Online-Resources)
+*[License](#License)
+*[Contact](#Contact)
 ### About the Project
 
-When "Start Quiz" button is pressed, users are presented with a short quiz on JavaScript fundamentals. Time elapses in one corner, and additional time is deducted as a penalty for wrong answers. At the end of the quiz, all are invited to enter their initials and view high scores stored on the leaderboard. 
+When "Start Quiz" button is pressed, users are presented with a short quiz on JavaScript fundamentals. Time elapses in one corner, and additional time is deducted as a penalty for wrong answers. At the end of the quiz, all are invited to enter their initials and view high scores stored on the leader board. 
 
 ### View the Project
 
@@ -20,23 +21,30 @@ https://crosenfrisk.github.io/coding-quiz-challenge/
 
 ### Challenges Faced
 
-I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned.
+In December, I struggled to get the timer to work as desired. Getting the penalty to register on the timer was not as simple as I had envisioned. I was able to fix this in January.
 
-Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visable on html page *at times only one object would display while others disappeared* Thankfully this is now fixed.
+Additional challenges include: getting quiz question array to cycle, as well as getting option elements to be visible on html page *at times only one object would display while others disappeared* Thankfully this has also been fixed.
 
-Getting the leaderboard up and running meant revisiting course material from week 3 lesson 5.8. I realized upon reading it that I struggled with the material the first time around, so it doesn't surprise me now when working with this project that I have not yet been able to complete this portion of the assignment. ** I do plan to update after I spend some more time reviewing the material and meeting with my tutor this week and next .**
+*Update 2/16/22: Local storage is still an area that I struggle with. It has been almost a month since my last work on this project. I am submitting what I have with the hope that I can still get help from my tutor to complete the last leg of this project with regard to the high score page.*
 
+** Update 2/19/22: Local storage fixed! High score page dynamically generates and loads stored scores, added function to clear high scores and option to return to main page. **
 
 ### What I Enjoyed
 
-I enjoyed using Bootstrap for the first time and liked setting up my hmtl pages. I decided to use multiple pages rather than hiding and then revealing elements via CSS because it lead to a clearer back-end experience for me as the developer. Each page had its purpose. 
+I enjoyed using Bootstrap for the first time and liked setting up my hmtl pages. I decided to use multiple pages rather than hiding and then revealing elements via CSS because it lead to a clearer back-end experience for me as the developer. Each page had its own purpose. 
 
-`index.html ` was the landing page where the user could see they had options to either `Start Game!` or `View High Scores` and be directed to the respective pages. `quiz.html` stored the html layout for the quiz with vertical button elements and the timer in the nav section, while `highscores.html` was simply for viewing/storing user input *initials* along with score.
+Initially I created three html pages: `index.html ` was the landing page where the user could see they had options to either `Start Game!` or `View High Scores` and be directed to the respective pages. `quiz.html` stored the html layout for the quiz with vertical button elements and the timer in the nav section, while `highscores.html` was simply for viewing/storing user input *initials* along with score.
 
-Peers in my cohort approached the project in a variety of ways, which I am excited to learn more about.
+*Update 2/16/22: After I learned about dynamically generating divs, I did away with the three pages and their links, and simply used `index.html` to display the landing page, quiz, and then high score page.*
 ### Credits
 
-I had help from Google, W3Schools, MDN, and classmates Colin and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
+🎉 During the initial creation phase of this project, I had help from Google, W3Schools, MDN, and classmates Colin @soundproofboot and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
+
+🎉 *Update 2/16/22: My second iteration of the project involved creating a new white board to detail the flow of the project. @AndrewRosenfrisk discussed the importance of parameters with me and was a good listener any time I got stuck.*
+
+🎉 *Update 2/19/22: Lilo Valdez gave me feedback regarding local storage which helped me complete this project.*
+
+![new white board](assets/images/whiteboard2.jpg) 
 
 ### Online Resources
 
@@ -49,8 +57,7 @@ An [example](https://www.elated.com/javascript-timers-with-settimeout-and-setint
 
 Someone's [query](https://stackoverflow.com/questions/4435776/simple-clock-that-counts-down-from-30-seconds-and-executes-a-function-afterward) on Stack Overflow, which sounded like mine.
 
-[Build a Countdown Timer in Just 18 Lines of JavaScript](https://www.sitepoint.com/
-build-javascript-countdown-timer-no-dependencies/) by Yaphi Berhanu, Nilson Jacques from June 1, 2020. *I liked their idea as a starting off point, but it was completely different from my project, since theirs was answering all questions and then submitting, not filtering through question by question, like mine.*
+[Build a Countdown Timer in Just 18 Lines of JavaScript](https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/) by Yaphi Berhanu, Nilson Jacques from June 1, 2020. *I liked their idea as a starting off point, but it was completely different from my project, since theirs was answering all questions and then submitting, not filtering through question by question, like mine.*
 
 [Course Material from Trilogy Education and the Univeristy of Minnesota](https://courses.bootcampspot.com/courses/1215/pages/5-dot-5-4-schedule-task-auditing?module_item_id=367554) on JavaScript timers: setTimeout() and setInterval();
 
@@ -75,3 +82,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Contact
+
+If you have questions or would like to make suggestions or contributions, please email me at [claire.rosenfrisk@gmail.com](mailto:claire.rosenfrisk@gmail.com).
+
+Feel free to follow my work on GitHub    ![GitHub](/assets/images/github-brands.svg) [@crosenfrisk](https://github.com/crosenfrisk). Thank you for your time and for visiting my repository.
+

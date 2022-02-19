@@ -1,10 +1,10 @@
-.view-high-scores a {
+.view-high-scores {
     font-size: medium;
     color: #a281b8;
     cursor: pointer;
 }
 
-.view-high-scores a:hover{
+.view-high-scores:hover{
    font-size: 20px;
    text-decoration: none;
    text-shadow: 2px 2px 8px #470077;
@@ -38,6 +38,33 @@ h2 {
     text-decoration: none;
 }
 
-.btn-group-vertial {
+.btn-group-vertical {
     border: none;
+}
+
+#evaluation {
+    font-size: 32px;
+    font-style: italic;
+    font-weight: lighter;
+    border-top: 1px dotted grey;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#instructions{
+    margin: 5px 10px;
+}
+
+input {
+    width: 25%;
+    height: 50px;
+    align-items: right;
+}
+
+li {
+    list-style-position: inside;
+    background-color: #a281b8;
+    margin: auto;
+    padding: 10px;
 }
