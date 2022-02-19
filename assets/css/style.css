@@ -62,9 +62,9 @@ input {
     align-items: right;
 }
 
-/* .container-scores{
-    display: inline;
+li {
+    list-style-position: inside;
+    background-color: #a281b8;
     margin: auto;
-    align-items: center;
-    justify-items: flex-start;
-} */
+    padding: 10px;
+}

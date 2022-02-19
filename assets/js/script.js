@@ -65,13 +65,13 @@ var currentQuestion = myQuestions[nextQuestion];
 function unloadHome(){
     var homeEl = document.getElementById("home-container");
     homeEl.remove();
-}
+};
 
 // Set timer to display on page, then countdown begins with startQuiz();
 function displayTimer() {
     var timerEl = document.getElementById("timerDiv");
     timerEl.innerHTML = timeRemaining;
-  }
+  };
 
 // Timer will decrement each second until time runs out or have additional time
 // removed if answer is wrong in the evaluateAnswer() function;
@@ -86,7 +86,7 @@ function updateTimer(){
        timeRemaining--;
        displayTimer();
      }
-}
+};
 
 // Clicking button on home screen will lead to the "next page" where we remove the hardcoded html elements
 // and then load the questions using loadQuestion() function.
@@ -95,7 +95,7 @@ function startQuiz(){
     loadQuestion(nextQuestion);
     // start timer to decrement every second
     timer = setInterval(updateTimer, 1000);
-}
+};
 
 // Function will load questions from myQuestions array one at a time
 // using unloadQuestion to remove the current question and move to the next.
@@ -104,7 +104,7 @@ function loadQuestion(nextQuestion){
     unloadQuestion();
     }
     createQuestion(nextQuestion);
-}
+};
 
 // Dynamically generates the html of each question, appending it to the #parent-row container of main section.
 function createQuestion(nextQuestion){
@@ -169,13 +169,13 @@ function createQuestion(nextQuestion){
     evaluateAnswer(event);
   });
   
-}
+};
 
 // Removes the previous question in order to load the next question.
 function unloadQuestion(){
     // removes question contents from quiz page
     parentEl.replaceChildren();
-}
+};
 
 // Determines whether the answer is correct or incorrect based on criteria in myQuestions[]
 // if incorrect, deduct additional time as penalty.
@@ -200,13 +200,13 @@ function evaluateAnswer(event){
     else {
         endQuiz()
     };
-}
+};
 
 // Removes correct/incorrect from display 
 function clearEval(){
     var evaluationEl = document.getElementById("evaluation");
     evaluationEl.setAttribute('style', "display: none");
-}
+};
 
 // Creates element to display and then the time out to remove.
 function displayEval(evaluation) {
@@ -215,7 +215,7 @@ evaluationEl.textContent = evaluation;
 
 evaluationEl.setAttribute("style", "");
 setTimeout( () => {clearEval()}, 5000);
-}
+};
 
 // Quiz will end after all questions have been answered OR time has run out.
 function endQuiz() {
@@ -226,7 +226,7 @@ function endQuiz() {
     updateTimer();
 
     loadScoreForm();
-}
+};
 
 // Load Score Form will display after quiz has ended.
 function loadScoreForm() {
@@ -246,10 +246,13 @@ function loadScoreForm() {
   instructionsEl.id = "instructions";
 
   var inputEl = document.createElement("input");
+  inputEl.className ="mt-5 justify-content-center text-center";
 
   var submitBtnEl = document.createElement("button");
   submitBtnEl.textContent = "Submit";
   submitBtnEl.id ="submitBtn";
+  submitBtnEl.className ="btn btn-primary mt-5 btn-lg mt-5 justify-content-center text-center";
+  
 
   var children = [allDoneEl, yourFinalScoreEl, instructionsEl, inputEl, submitBtnEl];
 
@@ -299,7 +302,7 @@ function storeScore(score, initials){
     // Stringify the new array and save it in place of the previous array.
     localStorage.setItem('scores', JSON.stringify(scoresArray));
   }
-}
+};
 
 // Clicking the "View High Scores" button will load high scores to page.
 document.getElementById('view-high-scores').addEventListener('click', displayHighScores);
@@ -350,15 +353,16 @@ function displayHighScores(score){
     // scoresContainerEl.append(goBackBtn);
     // scoresContainerEl.append(clearScoreBtn);
 
-}
+};
 
+// Clear scores from array.
 function clearScores(score){
   localStorage.setItem('scores', '[]');
-  const parent = document.querySelector(".container-scores")
-while (parent.lastChild) {
-    parent.lastChild.remove()
-}
-}
+  const parent = document.querySelector(".container-scores");
+  while (parent.lastChild) {
+    parent.lastChild.remove();
+  }
+};
 
 document.getElementById('clearScoreBtn').addEventListener('click', clearScores);
 
