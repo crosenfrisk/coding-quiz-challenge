@@ -63,10 +63,8 @@ input {
 }
 
 /* .container-scores{
+    display: inline;
+    margin: auto;
     align-items: center;
-    border: 1px solid black;
-    padding-right: 100px;
-    padding-left: 28px;
-    width: 50px;
-    border-radius: 5px;
+    justify-items: flex-start;
 } */

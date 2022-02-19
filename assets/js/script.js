@@ -307,7 +307,7 @@ document.getElementById('view-high-scores').addEventListener('click', displayHig
 // Displaying high scores happens after the user inputs their initials and saves their score.
 function displayHighScores(score){
   // Remove View High Scores from upper left and timer div from upper right, clear other text.
-  document.querySelector('.quiz-container').style.display = 'none';
+  document.querySelector('.container').style.display = 'none';
   document.querySelector('#highScores').style.display = ''
   document.querySelector('.view-high-scores').style.display = 'none';
   document.querySelector('.timer').style.display = 'none';
