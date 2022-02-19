@@ -5,12 +5,13 @@
 *[View the Project](View-The-Project)
 *[Challenges Faced](#Challenges-Faced)
 *[What I Enjoyed!](#What-I-Enjoyed)
-*[Credits](Credits)
-*[Online Resources](Online-Resources)
-*[License](License)
+*[Credits](#Credits)
+*[Online Resources](#Online-Resources)
+*[License](#License)
+*[Contact](#Contact)
 ### About the Project
 
-When "Start Quiz" button is pressed, users are presented with a short quiz on JavaScript fundamentals. Time elapses in one corner, and additional time is deducted as a penalty for wrong answers. At the end of the quiz, all are invited to enter their initials and view high scores stored on the leaderboard. 
+When "Start Quiz" button is pressed, users are presented with a short quiz on JavaScript fundamentals. Time elapses in one corner, and additional time is deducted as a penalty for wrong answers. At the end of the quiz, all are invited to enter their initials and view high scores stored on the leader board. 
 
 ### View the Project
 
@@ -26,18 +27,22 @@ Additional challenges include: getting quiz question array to cycle, as well as 
 
 *Update 2/16/22: Local storage is still an area that I struggle with. It has been almost a month since my last work on this project. I am submitting what I have with the hope that I can still get help from my tutor to complete the last leg of this project with regard to the high score page.*
 
+** Update 2/19/22: Local storage fixed! High score page dynamically generates and loads stored scores, added function to clear high scores and option to return to main page. **
+
 ### What I Enjoyed
 
-I enjoyed using Bootstrap for the first time and liked setting up my hmtl pages. I decided to use multiple pages rather than hiding and then revealing elements via CSS because it lead to a clearer back-end experience for me as the developer. Each page had its purpose. 
+I enjoyed using Bootstrap for the first time and liked setting up my hmtl pages. I decided to use multiple pages rather than hiding and then revealing elements via CSS because it lead to a clearer back-end experience for me as the developer. Each page had its own purpose. 
 
 Initially I created three html pages: `index.html ` was the landing page where the user could see they had options to either `Start Game!` or `View High Scores` and be directed to the respective pages. `quiz.html` stored the html layout for the quiz with vertical button elements and the timer in the nav section, while `highscores.html` was simply for viewing/storing user input *initials* along with score.
 
 *Update 2/16/22: After I learned about dynamically generating divs, I did away with the three pages and their links, and simply used `index.html` to display the landing page, quiz, and then high score page.*
 ### Credits
 
-During the initial creation phase of this project, I had help from Google, W3Schools, MDN, and classmates Colin and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
+🎉 During the initial creation phase of this project, I had help from Google, W3Schools, MDN, and classmates Colin @soundproofboot and @Kyler-McLachlan (GitHub username). I also received general feedback from Manon of AskBCS, and Harrison our class TA.
 
-*Update 2/16/22: My second iteration of the project involved creating a new white board to detail the flow of the project. @AndrewRosenfrisk discussed the importance of parameters with me and was a good listener any time I got stuck.*
+🎉 *Update 2/16/22: My second iteration of the project involved creating a new white board to detail the flow of the project. @AndrewRosenfrisk discussed the importance of parameters with me and was a good listener any time I got stuck.*
+
+🎉 *Update 2/19/22: Lilo Valdez gave me feedback regarding local storage which helped me complete this project.*
 
 ![new white board](assets/images/whiteboard2.jpg) 
 
@@ -77,3 +82,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Contact
+
+If you have questions or would like to make suggestions or contributions, please email me at [claire.rosenfrisk@gmail.com](mailto:claire.rosenfrisk@gmail.com).
+
+Feel free to follow my work on GitHub    ![GitHub](/assets/images/github-brands.svg) [@crosenfrisk](https://github.com/crosenfrisk). Thank you for your time and for visiting my repository.
+
